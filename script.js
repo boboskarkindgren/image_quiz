@@ -82,8 +82,17 @@ btnLevel1.addEventListener('click', e => {
 	alt3.innerText = optionsLevel1[2];
 	alt4.innerText = optionsLevel1[3];
 	
-	
+	alt.addEventListener('click', e => {
+		console.log(e.target.innerText);
+		if (e.target.innerText == correctPerson.name) {
+			console.log('correct');
+		} else {
+			console.log('wrong')
+		}
+	})
 })
+
+
 
 btnLevel2.addEventListener('click', e => {
 	shuffleArray(shuffledStudents);
@@ -112,6 +121,15 @@ btnLevel2.addEventListener('click', e => {
 	alt2.innerText = optionsLevel2[1];
 	alt3.innerText = optionsLevel2[2];
 	alt4.innerText = optionsLevel2[3];
+
+	alt.addEventListener('click', e => {
+		console.log(e.target.innerText);
+		if (e.target.innerText == correctPerson.name) {
+			console.log('correct');
+		} else {
+			console.log('wrong')
+		}
+	})
 	
 	
 })
@@ -144,6 +162,14 @@ btnLevel3.addEventListener('click', e => {
 	alt3.innerText = optionsLevel3[2];
 	alt4.innerText = optionsLevel3[3];
 	
+	alt.addEventListener('click', e => {
+		console.log(e.target.innerText);
+		if (e.target.innerText == correctPerson.name) {
+			console.log('correct');
+		} else {
+			console.log('wrong')
+		}
+	})
 	
 })
 
