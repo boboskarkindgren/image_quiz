@@ -163,6 +163,11 @@ btnLevel1.addEventListener('click', e => {
 		const cheat = document.querySelector('#cheat')
 		cheat.innerText = tries
 		if (tries === level1.length){
+			if (correctGuesses >= 5){
+				results.classList.add('alert', 'alert-success')
+			} else{
+				results.classList.add('alert', 'alert-danger')
+			}
 		results.classList.remove('hide')
 		results.innerText = `You got ${correctGuesses} correct guesses out of ${tries} questions. `
 		}
