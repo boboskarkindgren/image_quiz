@@ -2,7 +2,7 @@ const body = document.querySelector('body');
 const header = document.querySelector('#header');
 const highscore = document.querySelector('#highscore');
 const alt = document.querySelector('#alternatives');
-
+const nextBtn = document.querySelector('#next');
 //level buttons selectors
 const levels = document.querySelector('#levels'); // container for level buttons
 const btnLevel1 = document.querySelector('#level-1');
@@ -45,12 +45,31 @@ const shuffleArray = (array) => {
 const newPerson = (array => {
 
 }) 
+
+
+
+// Get a random item in array between 0-array.length
+const getRandomItem = (max) => {
+	
+	return Math.floor( Math.random() * max );
+}
+
+// change text on the alternatives from the made array in this case, options
+const altText = (array) => {
+	alt1.innerText = array[0];
+	alt2.innerText = array[1];
+	alt3.innerText = array[2];
+	alt4.innerText = array[3];
+};
+
+let number = 0;
+
 // eventlisteners for level buttons
 btnLevel1.addEventListener('click', e => {
 	shuffleArray(shuffledStudents);
 	const level1 = shuffledStudents.slice(0, 10)
-	console.log(level1);
-	const correctPerson = level1[0];
+	let correctPerson = level1[`${number}`];
+	console.log('level', level1);
 	//const correctPerson = level1[getRandomItem(level1.length)];
 	console.log(level1.length);
 	console.log(correctPerson);
@@ -65,35 +84,69 @@ btnLevel1.addEventListener('click', e => {
 	const randomPerson3 = level1[getRandomItem(level1.length)].name;
 	alt4.innerText = level1[randomPerson4].name;
 	*/
-	let optionsLevel1 = [correctPerson.name];
+	let options = [correctPerson.name];
 	
 	//push items into the array until 4 items exist
-	while (optionsLevel1.length < 4) {
+	while (options.length < 4) {
 		const randomPerson = level1[getRandomItem(level1.length)].name;
-		if (!optionsLevel1.includes(randomPerson)) {
-			optionsLevel1.push(randomPerson);
+		if (!options.includes(randomPerson)) {
+			options.push(randomPerson);
 		}
 	}
-	console.log(optionsLevel1); // before shuffle
-	shuffleArray(optionsLevel1); //för att inte alltid få correct person på alternativ 1
-	console.log(optionsLevel1); // after shuffle
+	console.log(options); // before shuffle
+	shuffleArray(options); //för att inte alltid få correct person på alternativ 1
+	console.log(options); // after shuffle
 	
-	alt1.innerText = optionsLevel1[0];
-	alt2.innerText = optionsLevel1[1];
-	alt3.innerText = optionsLevel1[2];
-	alt4.innerText = optionsLevel1[3];
+	// alt1.innerText = options[0];
+	// alt2.innerText = options[1];
+	// alt3.innerText = options[2];
+	// alt4.innerText = options[3];
+
+	altText(options) // kallar på denna funktion för att ändra text i de olika alternativen
 	
 	alt.addEventListener('click', e => {
 		console.log(e.target.innerText);
 		if (e.target.innerText == correctPerson.name) {
 			console.log('correct');
+			e.target.classList.add('btn-success');
+			e.target.classList.remove('btn-warning');
 		} else {
-			console.log('wrong')
+			console.log('wrong');
+			e.target.classList.add('btn-danger');
+			e.target.classList.remove('btn-warning');
 		}
 	})
+
+	nextBtn.addEventListener('click', e =>{
+		const allBtnAlt = document.querySelectorAll('#alternatives button');
+		console.log(allBtnAlt);
+		allBtnAlt.forEach (element => {
+			element.classList.add('btn-warning')
+			element.classList.remove('btn-danger', 'btn-success');
+		})
+
+		number++;
+		correctPerson = level1[`${number}`];
+		
+
+		img.src = correctPerson.image;
+
+		options = [correctPerson.name];
+
+		while (options.length < 4) {
+			const randomPerson = level1[getRandomItem(level1.length)].name;
+			if (!options.includes(randomPerson)) {
+				options.push(randomPerson);
+			}
+		}
+
+		altText(options);
+		//correctPerson ++;
+		//console.log(correctPerson)
+
+		
+	})
 })
-
-
 
 btnLevel2.addEventListener('click', e => {
 	shuffleArray(shuffledStudents);
@@ -105,23 +158,23 @@ btnLevel2.addEventListener('click', e => {
 
 	img.src = correctPerson.image;
 	
-	let optionsLevel2 = [correctPerson.name];
+	let options = [correctPerson.name];
 	
 	//push items into the array until 4 items exist
-	while (optionsLevel2.length < 4) {
+	while (options.length < 4) {
 		const randomPerson = level2[getRandomItem(level2.length)].name;
-		if (!optionsLevel2.includes(randomPerson)) {
-			optionsLevel2.push(randomPerson);
+		if (!options.includes(randomPerson)) {
+			options.push(randomPerson);
 		}
 	}
-	console.log(optionsLevel2); // before shuffle
-	shuffleArray(optionsLevel2);
-	console.log(optionsLevel2); // after shuffle
+	console.log(options); // before shuffle
+	shuffleArray(options);
+	console.log(options); // after shuffle
 	
-	alt1.innerText = optionsLevel2[0];
-	alt2.innerText = optionsLevel2[1];
-	alt3.innerText = optionsLevel2[2];
-	alt4.innerText = optionsLevel2[3];
+	alt1.innerText = options[0];
+	alt2.innerText = options[1];
+	alt3.innerText = options[2];
+	alt4.innerText = options[3];
 
 	alt.addEventListener('click', e => {
 		console.log(e.target.innerText);
@@ -145,23 +198,23 @@ btnLevel3.addEventListener('click', e => {
 
 	img.src = correctPerson.image;
 	
-	let optionsLevel3 = [correctPerson.name];
+	let options = [correctPerson.name];
 	
 	//push items into the array until 4 items exist
-	while (optionsLevel3.length < 4) {
+	while (options.length < 4) {
 		const randomPerson = level3[getRandomItem(level3.length)].name;
-		if (!optionsLevel3.includes(randomPerson)) {
-			optionsLevel3.push(randomPerson);
+		if (!options.includes(randomPerson)) {
+			options.push(randomPerson);
 		}
 	}
-	console.log(optionsLevel3); // before shuffle
-	shuffleArray(optionsLevel3);
-	console.log(optionsLevel3); // after shuffle
+	console.log(options); // before shuffle
+	shuffleArray(options);
+	console.log(options); // after shuffle
 	
-	alt1.innerText = optionsLevel3[0];
-	alt2.innerText = optionsLevel3[1];
-	alt3.innerText = optionsLevel3[2];
-	alt4.innerText = optionsLevel3[3];
+	alt1.innerText = options[0];
+	alt2.innerText = options[1];
+	alt3.innerText = options[2];
+	alt4.innerText = options[3];
 	
 	alt.addEventListener('click', e => {
 		console.log(e.target.innerText);
@@ -174,11 +227,6 @@ btnLevel3.addEventListener('click', e => {
 	
 })
 
-// Get a random item in array between 0-array.length
-const getRandomItem = (max) => {
-	
-	return Math.floor( Math.random() * max );
-} 
 
 
 
