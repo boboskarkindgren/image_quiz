@@ -3,7 +3,6 @@ const header = document.querySelector('#header');
 const highscore = document.querySelector('#highscore');
 const alt = document.querySelector('#alternatives');
 const nextBtn = document.querySelector('#next');
-const results = document.querySelector('#results');
 //level buttons selectors
 const levels = document.querySelector('#levels'); // container for level buttons
 const btnLevel1 = document.querySelector('#level-1');
@@ -63,46 +62,7 @@ const altText = (array) => {
 	alt4.innerText = array[3];
 };
 
-/*
-const GetNextImg = (levelNbr) => {
-	nextBtn.addEventListener('click', e =>{
-		const allBtnAlt = document.querySelectorAll('#alternatives button');
-		console.log(allBtnAlt);
-		allBtnAlt.forEach (element => {
-			element.classList.add('btn-warning')
-			element.classList.remove('btn-danger', 'btn-success');
-		})
-
-		number++;
-		correctPerson = levelNbr[`${number}`];
-		
-
-		img.src = correctPerson.image;
-
-		options = [correctPerson.name];
-
-		while (options.length < 4) {
-			const randomPerson = levelNbr[getRandomItem(levelNbr.length)].name;
-			if (!options.includes(randomPerson)) {
-				options.push(randomPerson);
-			}
-		}
-		shuffleArray(options)
-		altText(options);
-		//correctPerson ++;
-		//console.log(correctPerson)
-
-		
-	})
-	
-}	
-*/
-
 let number = 0;
-
-let correctGuesses = 0;
-let tries = 0;
-let wrongGuesses = 0;
 
 // eventlisteners for level buttons
 btnLevel1.addEventListener('click', e => {
@@ -141,7 +101,7 @@ btnLevel1.addEventListener('click', e => {
 	// alt2.innerText = options[1];
 	// alt3.innerText = options[2];
 	// alt4.innerText = options[3];
-	
+
 	altText(options) // kallar på denna funktion för att ändra text i de olika alternativen
 	
 	alt.addEventListener('click', e => {
@@ -150,29 +110,13 @@ btnLevel1.addEventListener('click', e => {
 			console.log('correct');
 			e.target.classList.add('btn-success');
 			e.target.classList.remove('btn-warning');
-			tries ++;//
-			correctGuesses ++;//
-			highscore.innerText = `Highscore: ${correctGuesses}`;// 
 		} else {
 			console.log('wrong');
 			e.target.classList.add('btn-danger');
 			e.target.classList.remove('btn-warning');
-			tries++
-			wrongGuesses ++; //
-		}
-		const cheat = document.querySelector('#cheat')
-		cheat.innerText = tries
-		if (tries === level1.length){
-		results.classList.remove('hide')
-		results.innerText = `You got ${correctGuesses} correct guesses out of ${tries} questions. `
 		}
 	})
 
-	
-	
-	//GetNextImg(level1);
-
-	
 	nextBtn.addEventListener('click', e =>{
 		const allBtnAlt = document.querySelectorAll('#alternatives button');
 		console.log(allBtnAlt);
@@ -195,22 +139,20 @@ btnLevel1.addEventListener('click', e => {
 				options.push(randomPerson);
 			}
 		}
-		
-		shuffleArray(options);
+
 		altText(options);
 		//correctPerson ++;
 		//console.log(correctPerson)
 
 		
 	})
-	
 })
 
 btnLevel2.addEventListener('click', e => {
 	shuffleArray(shuffledStudents);
 	const level2 = shuffledStudents.slice(0, 20)
 	console.log(level2);
-	correctPerson = level2[getRandomItem(level2.length)];
+	const correctPerson = level2[getRandomItem(level2.length)];
 	console.log(level2.length);
 	console.log(correctPerson);
 
@@ -229,61 +171,28 @@ btnLevel2.addEventListener('click', e => {
 	shuffleArray(options);
 	console.log(options); // after shuffle
 	
-	
-	altText(options) // kallar på denna funktion för att ändra text i de olika alternativen
-	
+	alt1.innerText = options[0];
+	alt2.innerText = options[1];
+	alt3.innerText = options[2];
+	alt4.innerText = options[3];
+
 	alt.addEventListener('click', e => {
 		console.log(e.target.innerText);
 		if (e.target.innerText == correctPerson.name) {
 			console.log('correct');
-			e.target.classList.add('btn-success');
-			e.target.classList.remove('btn-warning');
 		} else {
-			console.log('wrong');
-			e.target.classList.add('btn-danger');
-			e.target.classList.remove('btn-warning');
+			console.log('wrong')
 		}
-
-		
 	})
 	
-	nextBtn.addEventListener('click', e =>{
-		const allBtnAlt = document.querySelectorAll('#alternatives button');
-		console.log(allBtnAlt);
-		allBtnAlt.forEach (element => {
-			element.classList.add('btn-warning')
-			element.classList.remove('btn-danger', 'btn-success');
-		})
-
-		number++;
-		correctPerson = level2[`${number}`];
-		
-
-		img.src = correctPerson.image;
-
-		options = [correctPerson.name];
-
-		while (options.length < 4) {
-			const randomPerson = level2[getRandomItem(level2.length)].name;
-			if (!options.includes(randomPerson)) {
-				options.push(randomPerson);
-			}
-		}
-		
-		shuffleArray(options);
-		altText(options);
-		//correctPerson ++;
-		//console.log(correctPerson)
-
-		
-	})
+	
 })
 
 btnLevel3.addEventListener('click', e => {
 	shuffleArray(shuffledStudents);
 	const level3 = shuffledStudents
 	console.log(level3);
-	correctPerson = level3[getRandomItem(level3.length)]; 
+	const correctPerson = level3[getRandomItem(level3.length)]; 
 	console.log(level3.length);
 	console.log(correctPerson);
 
@@ -302,53 +211,20 @@ btnLevel3.addEventListener('click', e => {
 	shuffleArray(options);
 	console.log(options); // after shuffle
 	
-	altText(options) // kallar på denna funktion för att ändra text i de olika alternativen
+	alt1.innerText = options[0];
+	alt2.innerText = options[1];
+	alt3.innerText = options[2];
+	alt4.innerText = options[3];
 	
 	alt.addEventListener('click', e => {
 		console.log(e.target.innerText);
 		if (e.target.innerText == correctPerson.name) {
 			console.log('correct');
-			e.target.classList.add('btn-success');
-			e.target.classList.remove('btn-warning');
 		} else {
-			console.log('wrong');
-			e.target.classList.add('btn-danger');
-			e.target.classList.remove('btn-warning');
+			console.log('wrong')
 		}
-
-		
 	})
 	
-	nextBtn.addEventListener('click', e =>{
-		const allBtnAlt = document.querySelectorAll('#alternatives button');
-		console.log(allBtnAlt);
-		allBtnAlt.forEach (element => {
-			element.classList.add('btn-warning')
-			element.classList.remove('btn-danger', 'btn-success');
-		})
-
-		number++;
-		correctPerson = level3[`${number}`];
-		
-
-		img.src = correctPerson.image;
-
-		options = [correctPerson.name];
-
-		while (options.length < 4) {
-			const randomPerson = level3[getRandomItem(level3.length)].name;
-			if (!options.includes(randomPerson)) {
-				options.push(randomPerson);
-			}
-		}
-		
-		shuffleArray(options);
-		altText(options);
-		//correctPerson ++;
-		//console.log(correctPerson)
-
-		
-	})
 })
 
 
