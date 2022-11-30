@@ -50,7 +50,8 @@ btnLevel1.addEventListener('click', e => {
 	shuffleArray(shuffledStudents);
 	const level1 = shuffledStudents.slice(0, 10)
 	console.log(level1);
-	const correctPerson = level1[getRandomItem(level1.length)];
+	const correctPerson = level1[0];
+	//const correctPerson = level1[getRandomItem(level1.length)];
 	console.log(level1.length);
 	console.log(correctPerson);
 	//img.src = level1[correctPerson].image
@@ -74,7 +75,7 @@ btnLevel1.addEventListener('click', e => {
 		}
 	}
 	console.log(optionsLevel1); // before shuffle
-	shuffleArray(optionsLevel1);
+	shuffleArray(optionsLevel1); //för att inte alltid få correct person på alternativ 1
 	console.log(optionsLevel1); // after shuffle
 	
 	alt1.innerText = optionsLevel1[0];
@@ -138,7 +139,7 @@ btnLevel3.addEventListener('click', e => {
 	shuffleArray(shuffledStudents);
 	const level3 = shuffledStudents
 	console.log(level3);
-	const correctPerson = level3[getRandomItem(level3.length)];
+	const correctPerson = level3[getRandomItem(level3.length)]; 
 	console.log(level3.length);
 	console.log(correctPerson);
 
