@@ -98,6 +98,23 @@ const GetNextImg = (levelNbr) => {
 }	
 */
 
+const closeBtn = () => {
+	alt1.setAttribute('disabled', 'disabled');
+	alt2.setAttribute('disabled', 'disabled');
+	alt3.setAttribute('disabled', 'disabled');
+	alt4.setAttribute('disabled', 'disabled');
+}; 
+
+const openBtn = () => {
+	alt1.removeAttribute('disabled', 'disabled');
+	alt2.removeAttribute('disabled', 'disabled');
+	alt3.removeAttribute('disabled', 'disabled');
+	alt4.removeAttribute('disabled', 'disabled');
+};
+
+
+
+
 let number = 0;
 
 let correctGuesses = 0;
@@ -145,6 +162,8 @@ btnLevel1.addEventListener('click', e => {
 	altText(options) // kallar på denna funktion för att ändra text i de olika alternativen
 	
 	alt.addEventListener('click', e => {
+		if (e.target.tagName === 'BUTTON'){
+		closeBtn()
 		console.log(e.target.innerText);
 		if (e.target.innerText == correctPerson.name) {
 			console.log('correct');
@@ -171,6 +190,9 @@ btnLevel1.addEventListener('click', e => {
 		results.classList.remove('hide')
 		results.innerText = `You got ${correctGuesses} correct guesses out of ${tries} questions. `
 		}
+
+		}
+		
 	})
 
 	
@@ -179,6 +201,7 @@ btnLevel1.addEventListener('click', e => {
 
 	
 	nextBtn.addEventListener('click', e =>{
+		openBtn()
 		const allBtnAlt = document.querySelectorAll('#alternatives button');
 		console.log(allBtnAlt);
 		allBtnAlt.forEach (element => {
@@ -238,35 +261,40 @@ btnLevel2.addEventListener('click', e => {
 	altText(options) // kallar på denna funktion för att ändra text i de olika alternativen
 	
 	alt.addEventListener('click', e => {
-		console.log(e.target.innerText);
-		if (e.target.innerText == correctPerson.name) {
-			console.log('correct');
-			e.target.classList.add('btn-success');
-			e.target.classList.remove('btn-warning');
-			tries ++;//
-			correctGuesses ++;//
-			highscore.innerText = `Highscore: ${correctGuesses}`;// 
-		} else {
-			console.log('wrong');
-			e.target.classList.add('btn-danger');
-			e.target.classList.remove('btn-warning');
-			tries++
-			wrongGuesses ++; //
-		}
-		const cheat = document.querySelector('#cheat')
-		cheat.innerText = tries
-		if (tries === level2.length){
-			if (correctGuesses >= 15){
-				results.classList.add('alert', 'alert-success')
-			} else{
-				results.classList.add('alert', 'alert-danger')
+		if (e.target.tagName === 'BUTTON'){
+			closeBtn();
+			console.log(e.target.innerText);
+			if (e.target.innerText == correctPerson.name) {
+				console.log('correct');
+				e.target.classList.add('btn-success');
+				e.target.classList.remove('btn-warning');
+				tries ++;//
+				correctGuesses ++;//
+				highscore.innerText = `Highscore: ${correctGuesses}`;// 
+			} else {
+				console.log('wrong');
+				e.target.classList.add('btn-danger');
+				e.target.classList.remove('btn-warning');
+				tries++
+				wrongGuesses ++; //
 			}
-		results.classList.remove('hide')
-		results.innerText = `You got ${correctGuesses} correct guesses out of ${tries} questions. `
+			const cheat = document.querySelector('#cheat')
+			cheat.innerText = tries
+			if (tries === level2.length){
+				if (correctGuesses >= 15){
+					results.classList.add('alert', 'alert-success')
+				} else{
+					results.classList.add('alert', 'alert-danger')
+				}
+			results.classList.remove('hide')
+			results.innerText = `You got ${correctGuesses} correct guesses out of ${tries} questions. `
+			}
+
 		}
 	})
 	
 	nextBtn.addEventListener('click', e =>{
+		openBtn();
 		const allBtnAlt = document.querySelectorAll('#alternatives button');
 		console.log(allBtnAlt);
 		allBtnAlt.forEach (element => {
@@ -324,35 +352,40 @@ btnLevel3.addEventListener('click', e => {
 	altText(options) // kallar på denna funktion för att ändra text i de olika alternativen
 	
 	alt.addEventListener('click', e => {
-		console.log(e.target.innerText);
-		if (e.target.innerText == correctPerson.name) {
-			console.log('correct');
-			e.target.classList.add('btn-success');
-			e.target.classList.remove('btn-warning');
-			tries ++;//
-			correctGuesses ++;//
-			highscore.innerText = `Highscore: ${correctGuesses}`;// 
-		} else {
-			console.log('wrong');
-			e.target.classList.add('btn-danger');
-			e.target.classList.remove('btn-warning');
-			tries++
-			wrongGuesses ++; //
-		}
-		const cheat = document.querySelector('#cheat')
-		cheat.innerText = tries
-		if (tries === level3.length){
-			if (correctGuesses >= 30){
-				results.classList.add('alert', 'alert-success')
-			} else{
-				results.classList.add('alert', 'alert-danger')
+		if (e.target.tagName === 'BUTTON'){
+			closeBtn();
+			console.log(e.target.innerText);
+			if (e.target.innerText == correctPerson.name) {
+				console.log('correct');
+				e.target.classList.add('btn-success');
+				e.target.classList.remove('btn-warning');
+				tries ++;//
+				correctGuesses ++;//
+				highscore.innerText = `Highscore: ${correctGuesses}`;// 
+			} else {
+				console.log('wrong');
+				e.target.classList.add('btn-danger');
+				e.target.classList.remove('btn-warning');
+				tries++
+				wrongGuesses ++; //
 			}
-		results.classList.remove('hide')
-		results.innerText = `You got ${correctGuesses} correct guesses out of ${tries} questions. `
+			const cheat = document.querySelector('#cheat')
+			cheat.innerText = tries
+			if (tries === level3.length){
+				if (correctGuesses >= 30){
+					results.classList.add('alert', 'alert-success')
+				} else{
+					results.classList.add('alert', 'alert-danger')
+				}
+			results.classList.remove('hide')
+			results.innerText = `You got ${correctGuesses} correct guesses out of ${tries} questions. `
+			}
+
 		}
 	})
 	
 	nextBtn.addEventListener('click', e =>{
+		openBtn()
 		const allBtnAlt = document.querySelectorAll('#alternatives button');
 		console.log(allBtnAlt);
 		allBtnAlt.forEach (element => {
