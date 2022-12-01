@@ -33,3 +33,43 @@ const newArray = students.map(student=> {
 })
 
 console.log(newArray);
+
+
+
+
+## funktionstester
+
+/*
+const GetNextImg = (levelNbr) => {
+	nextBtn.addEventListener('click', e =>{
+		const allBtnAlt = document.querySelectorAll('#alternatives button');
+		console.log(allBtnAlt);
+		allBtnAlt.forEach (element => {
+			element.classList.add('btn-warning')
+			element.classList.remove('btn-danger', 'btn-success');
+		})
+
+		number++;
+		correctPerson = levelNbr[`${number}`];
+		
+
+		img.src = correctPerson.image;
+
+		options = [correctPerson.name];
+
+		while (options.length < 4) {
+			const randomPerson = levelNbr[getRandomItem(levelNbr.length)].name;
+			if (!options.includes(randomPerson)) {
+				options.push(randomPerson);
+			}
+		}
+		shuffleArray(options)
+		altText(options);
+		//correctPerson ++;
+		//console.log(correctPerson)
+
+		
+	})
+	
+}	
+*/

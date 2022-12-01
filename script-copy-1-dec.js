@@ -17,8 +17,7 @@ const alt2 = document.querySelector('#alt-2');
 const alt3 = document.querySelector('#alt-3');
 const alt4 = document.querySelector('#alt-4');
 /*
-
-// Copy array with map
+//copy array with map
 const shuffledStudents = students.map(student=> {
 
 	return student;
@@ -26,7 +25,7 @@ const shuffledStudents = students.map(student=> {
 })
 */
 
-// Or copy array with spread so we don´t destruct the original array
+//Copy array with spread so we don´t destruct the original array
 const shuffledStudents = [...students];
 
 const shuffleArray = (array) => {
@@ -40,10 +39,20 @@ const shuffleArray = (array) => {
 	return array;
 }
 
+//shuffleArray(shuffledStudents);
+
+//console.log(students);
+//console.log(shuffledStudents);
+const newPerson = (array => {
+
+}) 
+
+
+
 // Get a random item in array between 0-array.length
 const getRandomItem = (max) => {
 	
-	return Math.floor( Math.random() * max ); //max = array length
+	return Math.floor( Math.random() * max );
 }
 
 // change text on the alternatives from the made array in this case, options
@@ -54,70 +63,9 @@ const altText = (array) => {
 	alt4.innerText = array[3];
 };
 
-const closeBtn = () => {
-	alt1.setAttribute('disabled', 'disabled');
-	alt2.setAttribute('disabled', 'disabled');
-	alt3.setAttribute('disabled', 'disabled');
-	alt4.setAttribute('disabled', 'disabled');
-}; 
-
-const openBtn = () => {
-	alt1.removeAttribute('disabled', 'disabled');
-	alt2.removeAttribute('disabled', 'disabled');
-	alt3.removeAttribute('disabled', 'disabled');
-	alt4.removeAttribute('disabled', 'disabled');
-};
-
-// tillhör funktionen nedan för att fungera
-shuffleArray(shuffledStudents);
-const level1 = shuffledStudents.slice(0, 10)
-
-// Funktion för koden till btnLevel1.addEventListener för level1 button
-const btnLevelsCode = (levelNbr) => {
-	
-	let correctPerson = levelNbr[`${number}`];
-	console.log('level', levelNbr);
-	console.log(levelNbr.length);
-	console.log('correct person',correctPerson);
-	img.src = correctPerson.image;
-	let options = [correctPerson.name];
-	
-	//push items into the array until 4 items exist
-	while (options.length < 4) {
-		const randomPerson = levelNbr[getRandomItem(levelNbr.length)].name;
-		if (!options.includes(randomPerson)) {
-			options.push(randomPerson);
-		}
-	}
-	
-	console.log(options); // before shuffle
-	shuffleArray(options); //för att inte alltid få correct person på alternativ 1
-	console.log(options); // after shuffle
-	
-	altText(options) // kallar på denna funktion för att läga till text i de olika alternativen. Se altText funktion
-	
-} 
-
-// Funktion för koden till alt.addEventListener dvs mina alternativ knappar med svar
-const btnAltCode = (levelNbr) => {
-	
-	const cheat = document.querySelector('#cheat')
-	cheat.innerText = tries
-	if (tries === levelNbr.length){
-		if (correctGuesses >= 5){
-				results.classList.add('alert', 'alert-success')
-		} else{
-				results.classList.add('alert', 'alert-danger')
-			}
-		results.classList.remove('hide')
-		results.innerText = `You got ${correctGuesses} correct guesses out of ${tries} questions. `
-	}
-
-}
-
-// Funktion för koden till min nextBtn.addEventListener, dvs knappen "NEXT"
-const nxtBtnCode = (levelNbr) => {
-	openBtn()
+/*
+const GetNextImg = (levelNbr) => {
+	nextBtn.addEventListener('click', e =>{
 		const allBtnAlt = document.querySelectorAll('#alternatives button');
 		console.log(allBtnAlt);
 		allBtnAlt.forEach (element => {
@@ -139,28 +87,80 @@ const nxtBtnCode = (levelNbr) => {
 				options.push(randomPerson);
 			}
 		}
-		
-		shuffleArray(options);
+		shuffleArray(options)
 		altText(options);
 		//correctPerson ++;
 		//console.log(correctPerson)
-}
- 
 
-//Nödvändiga variabler
+		
+	})
+	
+}	
+*/
+
+const closeBtn = () => {
+	alt1.setAttribute('disabled', 'disabled');
+	alt2.setAttribute('disabled', 'disabled');
+	alt3.setAttribute('disabled', 'disabled');
+	alt4.setAttribute('disabled', 'disabled');
+}; 
+
+const openBtn = () => {
+	alt1.removeAttribute('disabled', 'disabled');
+	alt2.removeAttribute('disabled', 'disabled');
+	alt3.removeAttribute('disabled', 'disabled');
+	alt4.removeAttribute('disabled', 'disabled');
+};
+
+
+
+
 let number = 0;
+
 let correctGuesses = 0;
 let tries = 0;
 let wrongGuesses = 0;
 
-//START av spel med eventlyssnare och funktioner
-
 // eventlisteners for level buttons
 btnLevel1.addEventListener('click', e => {
-	correctPerson = level1[`${number}`];
-	btnLevelsCode(level1);
+	shuffleArray(shuffledStudents);
+	const level1 = shuffledStudents.slice(0, 10)
+	let correctPerson = level1[`${number}`];
+	console.log('level', level1);
+	//const correctPerson = level1[getRandomItem(level1.length)];
+	console.log(level1.length);
+	console.log(correctPerson);
+	//img.src = level1[correctPerson].image
+	img.src = correctPerson.image;
+	/*
+	alt1.innerText = level1[randomPerson].name
+	const randomPerson1 = level1[getRandomItem(level1.length)].name;
+	alt2.innerText = level1[randomPerson2].name
+	const randomPerson2 = level1[getRandomItem(level1.length)].name;
+	alt3.innerText = level1[randomPerson3].name
+	const randomPerson3 = level1[getRandomItem(level1.length)].name;
+	alt4.innerText = level1[randomPerson4].name;
+	*/
+	let options = [correctPerson.name];
 	
-
+	//push items into the array until 4 items exist
+	while (options.length < 4) {
+		const randomPerson = level1[getRandomItem(level1.length)].name;
+		if (!options.includes(randomPerson)) {
+			options.push(randomPerson);
+		}
+	}
+	console.log(options); // before shuffle
+	shuffleArray(options); //för att inte alltid få correct person på alternativ 1
+	console.log(options); // after shuffle
+	
+	// alt1.innerText = options[0];
+	// alt2.innerText = options[1];
+	// alt3.innerText = options[2];
+	// alt4.innerText = options[3];
+	
+	altText(options) // kallar på denna funktion för att ändra text i de olika alternativen
+	
 	alt.addEventListener('click', e => {
 		if (e.target.tagName === 'BUTTON'){
 		closeBtn()
@@ -179,42 +179,60 @@ btnLevel1.addEventListener('click', e => {
 			tries++
 			wrongGuesses ++; //
 		}
-		
-		btnAltCode(level1);
+		const cheat = document.querySelector('#cheat')
+		cheat.innerText = tries
+		if (tries === level1.length){
+			if (correctGuesses >= 5){
+				results.classList.add('alert', 'alert-success')
+			} else{
+				results.classList.add('alert', 'alert-danger')
+			}
+		results.classList.remove('hide')
+		results.innerText = `You got ${correctGuesses} correct guesses out of ${tries} questions. `
+		}
 
 		}
 		
 	})
 
 	
+	
+	//GetNextImg(level1);
+
+	
 	nextBtn.addEventListener('click', e =>{
+		openBtn()
+		const allBtnAlt = document.querySelectorAll('#alternatives button');
+		console.log(allBtnAlt);
+		allBtnAlt.forEach (element => {
+			element.classList.add('btn-warning')
+			element.classList.remove('btn-danger', 'btn-success');
+		})
+
+		number++;
+		correctPerson = level1[`${number}`];
 		
-		nxtBtnCode(level1);
+
+		img.src = correctPerson.image;
+
+		options = [correctPerson.name];
+
+		while (options.length < 4) {
+			const randomPerson = level1[getRandomItem(level1.length)].name;
+			if (!options.includes(randomPerson)) {
+				options.push(randomPerson);
+			}
+		}
+		
+		shuffleArray(options);
+		altText(options);
+		//correctPerson ++;
+		//console.log(correctPerson)
+
 		
 	})
 	
 })
-
-
-
-
-
-
-
-
-
-
-
-//Fokusera på level 1
-
-
-
-
-
-
-
-
-
 
 btnLevel2.addEventListener('click', e => {
 	shuffleArray(shuffledStudents);
