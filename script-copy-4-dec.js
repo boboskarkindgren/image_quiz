@@ -1,7 +1,5 @@
-
 const body = document.querySelector('body');
 const header = document.querySelector('#header');
-
 const highscore = document.querySelector('#highscore');
 const alt = document.querySelector('#alternatives');
 const nextBtn = document.querySelector('#next');
@@ -18,16 +16,6 @@ const alt1 = document.querySelector('#alt-1');
 const alt2 = document.querySelector('#alt-2');
 const alt3 = document.querySelector('#alt-3');
 const alt4 = document.querySelector('#alt-4');
-
-// new game button
-const startNewGameBtn = document.querySelector('#new-game');
-
-//Nödvändiga variabler
-let number = 0;
-let correctGuesses = 0;
-let tries = 0;
-let wrongGuesses = 0;
-let fails = [];
 /*
 
 // Copy array with map
@@ -52,7 +40,7 @@ const shuffleArray = (array) => {
 	return array;
 }
 
-// Get a random item in array between 0-array.length (10 ,20 eller 41)
+// Get a random item in array between 0-array.length
 const getRandomItem = (max) => {
 	
 	return Math.floor( Math.random() * max ); //max = array length
@@ -66,47 +54,29 @@ const altText = (array) => {
 	alt4.innerText = array[3];
 };
 
-// function to disable alt buttons
-const closeAltBtn = () => {
+const closeBtn = () => {
 	alt1.setAttribute('disabled', 'disabled');
 	alt2.setAttribute('disabled', 'disabled');
 	alt3.setAttribute('disabled', 'disabled');
 	alt4.setAttribute('disabled', 'disabled');
 }; 
 
-//function to enable alt buttons
-const openAltBtn = () => {
+const openBtn = () => {
 	alt1.removeAttribute('disabled', 'disabled');
 	alt2.removeAttribute('disabled', 'disabled');
 	alt3.removeAttribute('disabled', 'disabled');
 	alt4.removeAttribute('disabled', 'disabled');
 };
 
-// function to disable levelBtn
-const closeLevelsBtn = () => {
-	btnLevel1.setAttribute('disabled', 'disabled');
-	btnLevel2.setAttribute('disabled', 'disabled');
-	btnLevel3.setAttribute('disabled', 'disabled');
-}; 
-
-// function to enable levelBtn
-const openLevelsBtn = () => {
-	btnLevel1.removeAttribute('disabled', 'disabled');
-	btnLevel2.removeAttribute('disabled', 'disabled');
-	btnLevel3.removeAttribute('disabled', 'disabled');
-}; 
-
-// function 
-
 // tillhör funktionen nedan för att fungera
-//shuffleArray(shuffledStudents);
-//const level1 = shuffledStudents.slice(0, 10)
-//const level2 = shuffledStudents.slice(0, 20)
-//const level3 = shuffledStudents
+shuffleArray(shuffledStudents);
+const level1 = shuffledStudents.slice(0, 10)
+const level2 = shuffledStudents.slice(0, 20)
+const level3 = shuffledStudents
 
 // Funktion för koden till btnLevel1.addEventListener för level1 button
 const btnLevelsCode = (levelNbr) => {
-	alt.classList.remove('hide'); // visar alternativen när knappen trycks
+	
 	let correctPerson = levelNbr[`${number}`];
 	console.log('level', levelNbr);
 	console.log(levelNbr.length);
@@ -131,36 +101,25 @@ const btnLevelsCode = (levelNbr) => {
 } 
 
 // Funktion för koden till alt.addEventListener dvs mina alternativ knappar med svar
-const btnResultsCode = (levelNbr) => {
+const btnAltCode = (levelNbr) => {
 	
 	const cheat = document.querySelector('#cheat')
 	cheat.innerText = tries
 	if (tries === levelNbr.length){
-		//openLevelsBtn() //öppnar upp levelsknappar vid 10e gissningen
 		if (correctGuesses >= levelNbr.length/2){
 				results.classList.add('alert', 'alert-success')
 		} else{
 				results.classList.add('alert', 'alert-danger')
 			}
 		results.classList.remove('hide')
-		
-		fails = fails.map(fail=> {
-			return `<figure class="figure">
-			<figcaption class="figure-caption">${fail.name}</figcaption>
-			<img src="${fail.image}" class="figure-img img-fluid rounded" alt="...">
-		  	</figure>`
-			//return `<img class="img-fluid" src="${fail.image}"> ${fail.name}`
-		
-		})
-		results.innerHTML = `<div>You got ${correctGuesses} correct guesses out of ${tries} questions.</div>
-		<div>You failed at these:</div><div class="mt-4">${fails.join('')}</div> `
+		results.innerText = `You got ${correctGuesses} correct guesses out of ${tries} questions. `
 	}
 
 }
 
 // Funktion för koden till min nextBtn.addEventListener, dvs knappen "NEXT"
 const nxtBtnCode = (levelNbr) => {
-	openAltBtn()
+	openBtn()
 		const allBtnAlt = document.querySelectorAll('#alternatives button');
 		console.log(allBtnAlt);
 		allBtnAlt.forEach (element => {
@@ -188,47 +147,23 @@ const nxtBtnCode = (levelNbr) => {
 		//correctPerson ++;
 		//console.log(correctPerson)
 }
-
-// FUNKTION FÖR ALLA LEVELS
-
-// function to start new game
-const startNewGame = () => {
-	number = 0;
-	correctGuesses = 0;
-	tries = 0;
-	wrongGuesses = 0;
-	cheat.innerText = tries;
-	openLevelsBtn()
-	openAltBtn()
-	img.src ="/assets/images/students/alexander_olsson.jpg"
-	alt1.setAttribute('class', 'btn btn-warning');
-	alt2.setAttribute('class', 'btn btn-warning');
-	alt3.setAttribute('class', 'btn btn-warning');
-	alt4.setAttribute('class', 'btn btn-warning');
-	alt.classList.add('hide');
-	results.classList.add('hide');
-	results.classList.remove('d-flex');
-	
-}
  
 
-
+//Nödvändiga variabler
+let number = 0;
+let correctGuesses = 0;
+let tries = 0;
+let wrongGuesses = 0;
 
 // LEVEL 1
 btnLevel1.addEventListener('click', e => {
-	//alt.classList.remove('hide');
-	closeLevelsBtn()
-	shuffleArray(shuffledStudents);
-	const level1 = shuffledStudents.slice(0, 10)
 	correctPerson = level1[`${number}`];
-	//shuffleArray(level1); //
 	btnLevelsCode(level1);
-	
 	
 
 	alt.addEventListener('click', e => {
 		if (e.target.tagName === 'BUTTON'){
-		closeAltBtn()
+		closeBtn()
 		console.log(e.target.innerText);
 		if (e.target.innerText == correctPerson.name) {
 			console.log('correct');
@@ -242,12 +177,10 @@ btnLevel1.addEventListener('click', e => {
 			e.target.classList.add('btn-danger');
 			e.target.classList.remove('btn-warning');
 			tries++
-			wrongGuesses ++; 
-			fails.push(correctPerson);
-			console.log(fails);
+			wrongGuesses ++; //
 		}
 		
-		btnResultsCode(level1);
+		btnAltCode(level1);
 
 		}
 		
@@ -264,15 +197,13 @@ btnLevel1.addEventListener('click', e => {
 
 // LEVEL 2
 btnLevel2.addEventListener('click', e => {
-	shuffleArray(shuffledStudents);
-	const btnLevel2 = shuffledStudents.slice(0, 10)
 	correctPerson = level2[`${number}`];
 	btnLevelsCode(level2);
 	
 
 	alt.addEventListener('click', e => {
 		if (e.target.tagName === 'BUTTON'){
-		closeAltBtn()
+		closeBtn()
 		console.log(e.target.innerText);
 		if (e.target.innerText == correctPerson.name) {
 			console.log('correct');
@@ -289,7 +220,7 @@ btnLevel2.addEventListener('click', e => {
 			wrongGuesses ++; //
 		}
 		
-		btnResultsCode(level2);
+		btnAltCode(level2);
 
 		}
 		
@@ -306,15 +237,13 @@ btnLevel2.addEventListener('click', e => {
 
 // LEVEL 3
 btnLevel3.addEventListener('click', e => {
-	shuffleArray(shuffledStudents);
-	const btnLevel3 = shuffledStudents.slice(0, 10)
 	correctPerson = level3[`${number}`];
 	btnLevelsCode(level3);
 	
 
 	alt.addEventListener('click', e => {
 		if (e.target.tagName === 'BUTTON'){
-		closeAltBtn()
+		closeBtn()
 		console.log(e.target.innerText);
 		if (e.target.innerText == correctPerson.name) {
 			console.log('correct');
@@ -331,7 +260,7 @@ btnLevel3.addEventListener('click', e => {
 			wrongGuesses ++; //
 		}
 		
-		btnResultsCode(level3);
+		btnAltCode(level3);
 
 		}
 		
@@ -344,12 +273,6 @@ btnLevel3.addEventListener('click', e => {
 	})
 	
 })
-
-startNewGameBtn.addEventListener('click', e =>{
-	startNewGame();
-})
-
-
 
 
 
