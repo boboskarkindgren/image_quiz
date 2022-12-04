@@ -1,5 +1,4 @@
 
-
 const body = document.querySelector('body');
 const header = document.querySelector('#header');
 
@@ -349,5 +348,14 @@ btnLevel3.addEventListener('click', e => {
 startNewGameBtn.addEventListener('click', e =>{
 	startNewGame();
 })
+
+
+
+
+
+
+
+
+
 
 
