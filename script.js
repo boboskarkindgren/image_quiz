@@ -101,9 +101,9 @@ const openLevelsBtn = () => {
 
 // tillhör funktionen nedan för att fungera
 //shuffleArray(shuffledStudents);
-//const level1 = shuffledStudents.slice(0, 10)
-//const level2 = shuffledStudents.slice(0, 20)
-//const level3 = shuffledStudents
+const level1 = shuffledStudents.slice(0, 10)
+const level2 = shuffledStudents.slice(0, 20)
+const level3 = shuffledStudents
 
 // Funktion för koden till btnLevel1.addEventListener för level1 button
 const btnLevelsCode = (levelNbr) => {
@@ -192,6 +192,54 @@ const nxtBtnCode = (levelNbr) => {
 
 // FUNKTION FÖR ALLA LEVELS
 
+const levelFunc = (arr, nbr) =>{
+	closeLevelsBtn()
+	shuffleArray(shuffledStudents);
+	arr = shuffledStudents.slice(0, nbr)
+	correctPerson = arr[`${number}`];
+	//shuffleArray(level1); //
+	btnLevelsCode(arr);
+	
+	
+
+	alt.addEventListener('click', e => {
+		if (e.target.tagName === 'BUTTON'){
+		closeAltBtn()
+		console.log(e.target.innerText);
+		if (e.target.innerText == correctPerson.name) {
+			console.log('correct');
+			e.target.classList.add('btn-success');
+			e.target.classList.remove('btn-warning');
+			tries ++;//
+			correctGuesses ++;//
+			highscore.innerText = `Highscore: ${correctGuesses}`;// 
+		} else {
+			console.log('wrong');
+			e.target.classList.add('btn-danger');
+			e.target.classList.remove('btn-warning');
+			tries++
+			wrongGuesses ++; 
+			fails.push(correctPerson);
+			console.log(fails);
+		}
+		
+		btnResultsCode(arr);
+
+		}
+		
+	})
+
+	
+	nextBtn.addEventListener('click', e =>{
+		
+		nxtBtnCode(arr);
+		
+	})
+	
+} 
+
+
+
 // function to start new game
 const startNewGame = () => {
 	number = 0;
@@ -217,137 +265,33 @@ const startNewGame = () => {
 
 // LEVEL 1
 btnLevel1.addEventListener('click', e => {
-	//alt.classList.remove('hide');
-	closeLevelsBtn()
-	shuffleArray(shuffledStudents);
-	const level1 = shuffledStudents.slice(0, 10)
-	correctPerson = level1[`${number}`];
-	//shuffleArray(level1); //
-	btnLevelsCode(level1);
-	
-	
-
-	alt.addEventListener('click', e => {
-		if (e.target.tagName === 'BUTTON'){
-		closeAltBtn()
-		console.log(e.target.innerText);
-		if (e.target.innerText == correctPerson.name) {
-			console.log('correct');
-			e.target.classList.add('btn-success');
-			e.target.classList.remove('btn-warning');
-			tries ++;//
-			correctGuesses ++;//
-			highscore.innerText = `Highscore: ${correctGuesses}`;// 
-		} else {
-			console.log('wrong');
-			e.target.classList.add('btn-danger');
-			e.target.classList.remove('btn-warning');
-			tries++
-			wrongGuesses ++; 
-			fails.push(correctPerson);
-			console.log(fails);
-		}
-		
-		btnResultsCode(level1);
-
-		}
-		
-	})
-
-	
-	nextBtn.addEventListener('click', e =>{
-		
-		nxtBtnCode(level1);
-		
-	})
+	levelFunc(level1, 10);
 	
 })
 
 // LEVEL 2
 btnLevel2.addEventListener('click', e => {
-	shuffleArray(shuffledStudents);
-	const btnLevel2 = shuffledStudents.slice(0, 10)
-	correctPerson = level2[`${number}`];
-	btnLevelsCode(level2);
-	
-
-	alt.addEventListener('click', e => {
-		if (e.target.tagName === 'BUTTON'){
-		closeAltBtn()
-		console.log(e.target.innerText);
-		if (e.target.innerText == correctPerson.name) {
-			console.log('correct');
-			e.target.classList.add('btn-success');
-			e.target.classList.remove('btn-warning');
-			tries ++;//
-			correctGuesses ++;//
-			highscore.innerText = `Highscore: ${correctGuesses}`;// 
-		} else {
-			console.log('wrong');
-			e.target.classList.add('btn-danger');
-			e.target.classList.remove('btn-warning');
-			tries++
-			wrongGuesses ++; //
-		}
-		
-		btnResultsCode(level2);
-
-		}
-		
-	})
-
-	
-	nextBtn.addEventListener('click', e =>{
-		
-		nxtBtnCode(level2);
-		
-	})
+	levelFunc(level2, 20);
 	
 })
 
 // LEVEL 3
 btnLevel3.addEventListener('click', e => {
-	shuffleArray(shuffledStudents);
-	const btnLevel3 = shuffledStudents.slice(0, 10)
-	correctPerson = level3[`${number}`];
-	btnLevelsCode(level3);
-	
-
-	alt.addEventListener('click', e => {
-		if (e.target.tagName === 'BUTTON'){
-		closeAltBtn()
-		console.log(e.target.innerText);
-		if (e.target.innerText == correctPerson.name) {
-			console.log('correct');
-			e.target.classList.add('btn-success');
-			e.target.classList.remove('btn-warning');
-			tries ++;//
-			correctGuesses ++;//
-			highscore.innerText = `Highscore: ${correctGuesses}`;// 
-		} else {
-			console.log('wrong');
-			e.target.classList.add('btn-danger');
-			e.target.classList.remove('btn-warning');
-			tries++
-			wrongGuesses ++; //
-		}
-		
-		btnResultsCode(level3);
-
-		}
-		
-	})
-	
-	nextBtn.addEventListener('click', e =>{
-		
-		nxtBtnCode(level3);
-		
-	})
+	levelFunc(level3)
 	
 })
 
 startNewGameBtn.addEventListener('click', e =>{
 	startNewGame();
 })
+
+
+
+
+
+
+
+
+
 
 
