@@ -132,7 +132,6 @@ const btnResultsCode = (levelNbr) => {
   const cheat = document.querySelector("#cheat");
   cheat.innerText = tries;
   if (tries === levelNbr.length) {
-    nextBtn.setAttribute("disabled", "disabled");
     //openLevelsBtn() //öppnar upp levelsknappar vid 10e gissningen
     if (correctGuesses >= levelNbr.length / 2) {
       results.classList.add("alert", "alert-success");
@@ -186,7 +185,6 @@ const nxtBtnCode = (levelNbr) => {
 // FUNKTION FÖR ALLA LEVELS
 
 const levelFunc = (arr, nbr) => {
-  nextBtn.setAttribute("disabled", "disabled");
   closeLevelsBtn();
   shuffleArray(shuffledStudents);
   arr = shuffledStudents.slice(0, nbr);
@@ -195,7 +193,6 @@ const levelFunc = (arr, nbr) => {
   btnLevelsCode(arr);
 
   alt.addEventListener("click", (e) => {
-    nextBtn.removeAttribute("disabled", "disabled");
     if (e.target.tagName === "BUTTON") {
       closeAltBtn();
       console.log(e.target.innerText);
@@ -221,7 +218,6 @@ const levelFunc = (arr, nbr) => {
   });
 
   nextBtn.addEventListener("click", (e) => {
-    nextBtn.setAttribute("disabled", "disabled");
     nxtBtnCode(arr);
   });
 };
