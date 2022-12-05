@@ -27,17 +27,8 @@ let correctGuesses = 0;
 let tries = 0;
 let wrongGuesses = 0;
 let fails = [];
-/*
 
-// Copy array with map
-const shuffledStudents = students.map(student=> {
-
-	return student;
-
-})
-*/
-
-// Or copy array with spread so we don´t destruct the original array
+//copy the array
 const shuffledStudents = [...students];
 
 const shuffleArray = (array) => {
@@ -94,20 +85,14 @@ const openLevelsBtn = () => {
   btnLevel3.removeAttribute("disabled", "disabled");
 };
 
-// function
-
-// tillhör funktionen nedan för att fungera
-//shuffleArray(shuffledStudents);
 const level1 = shuffledStudents.slice(0, 10);
 const level2 = shuffledStudents.slice(0, 20);
 const level3 = shuffledStudents;
 
-// Funktion för koden till btnLevel1.addEventListener för level1 button
-const btnLevelsCode = (levelNbr) => {
+// Funktion för att rendera svarsalternativ och bild
+const createAlternatives = (levelNbr) => {
   alt.classList.remove("hide"); // visar alternativen när knappen trycks
   let correctPerson = levelNbr[`${number}`];
-  console.log("level", levelNbr);
-  console.log(levelNbr.length);
   console.log("correct person", correctPerson);
   img.src = correctPerson.image;
   let options = [correctPerson.name];
@@ -128,11 +113,11 @@ const btnLevelsCode = (levelNbr) => {
 };
 
 // Funktion för koden till alt.addEventListener dvs mina alternativ knappar med svar
-const btnResultsCode = (levelNbr) => {
+const renderResult = (levelNbr) => {
   const cheat = document.querySelector("#cheat");
   cheat.innerText = tries;
   if (tries === levelNbr.length) {
-    //openLevelsBtn() //öppnar upp levelsknappar vid 10e gissningen
+    nextBtn.setAttribute("disabled", "disabled"); ////////////////////////////////////////////
     if (correctGuesses >= levelNbr.length / 2) {
       results.classList.add("alert", "alert-success");
     } else {
@@ -145,10 +130,11 @@ const btnResultsCode = (levelNbr) => {
 			<figcaption class="figure-caption">${fail.name}</figcaption>
 			<img src="${fail.image}" class="figure-img img-fluid rounded" alt="...">
 		  	</figure>`;
-      //return `<img class="img-fluid" src="${fail.image}"> ${fail.name}`
     });
     results.innerHTML = `<div>You got ${correctGuesses} correct guesses out of ${tries} questions.</div>
-		<div>You failed at these:</div><div class="mt-4">${fails.join("")}</div> `;
+		<div><span>You failed at these:</span></div><div class="mt-4">${fails.join(
+      ""
+    )}</div> `;
   }
 };
 
@@ -156,7 +142,6 @@ const btnResultsCode = (levelNbr) => {
 const nxtBtnCode = (levelNbr) => {
   openAltBtn();
   const allBtnAlt = document.querySelectorAll("#alternatives button");
-  console.log(allBtnAlt);
   allBtnAlt.forEach((element) => {
     element.classList.add("btn-warning");
     element.classList.remove("btn-danger", "btn-success");
@@ -178,84 +163,82 @@ const nxtBtnCode = (levelNbr) => {
 
   shuffleArray(options);
   altText(options);
-  //correctPerson ++;
-  //console.log(correctPerson)
 };
 
 // FUNKTION FÖR ALLA LEVELS
+const levelFunc = (arr, nbr, levelNbr) => {
+  levelNbr.addEventListener("click", () => {
+    nextBtn.setAttribute("disabled", "disabled"); ////////////////////////////////////
+    closeLevelsBtn();
+    shuffleArray(shuffledStudents);
+    arr = shuffledStudents.slice(0, nbr);
+    correctPerson = arr[`${number}`];
+    //shuffleArray(level1); //
+    createAlternatives(arr);
 
-const levelFunc = (arr, nbr) => {
-  closeLevelsBtn();
-  shuffleArray(shuffledStudents);
-  arr = shuffledStudents.slice(0, nbr);
-  correctPerson = arr[`${number}`];
-  //shuffleArray(level1); //
-  btnLevelsCode(arr);
+    alt.addEventListener("click", (e) => {
+      nextBtn.removeAttribute("disabled", "disabled"); //////////////////////////////////
+      //checking guess
+      if (e.target.tagName === "BUTTON") {
+        closeAltBtn();
+        console.log(e.target.innerText);
+        if (e.target.innerText == correctPerson.name) {
+          console.log("correct");
+          e.target.classList.add("btn-success");
+          e.target.classList.remove("btn-warning");
+          tries++; //
+          correctGuesses++; //
+          highscore.innerText = `Highscore: ${correctGuesses}`; //
+        } else {
+          console.log("wrong");
+          e.target.classList.add("btn-danger");
+          e.target.classList.remove("btn-warning");
+          tries++;
+          wrongGuesses++;
+          fails.push(correctPerson);
+          console.log(fails);
+        }
 
-  alt.addEventListener("click", (e) => {
-    if (e.target.tagName === "BUTTON") {
-      closeAltBtn();
-      console.log(e.target.innerText);
-      if (e.target.innerText == correctPerson.name) {
-        console.log("correct");
-        e.target.classList.add("btn-success");
-        e.target.classList.remove("btn-warning");
-        tries++; //
-        correctGuesses++; //
-        highscore.innerText = `Highscore: ${correctGuesses}`; //
-      } else {
-        console.log("wrong");
-        e.target.classList.add("btn-danger");
-        e.target.classList.remove("btn-warning");
-        tries++;
-        wrongGuesses++;
-        fails.push(correctPerson);
-        console.log(fails);
+        renderResult(arr);
       }
-
-      btnResultsCode(arr);
-    }
+    });
   });
 
   nextBtn.addEventListener("click", (e) => {
+    nextBtn.setAttribute("disabled", "disabled");
     nxtBtnCode(arr);
   });
 };
 
 // function to start new game
 const startNewGame = () => {
-  number = 0;
-  correctGuesses = 0;
-  tries = 0;
-  wrongGuesses = 0;
-  cheat.innerText = tries;
-  openLevelsBtn();
-  openAltBtn();
-  img.src = "/assets/images/students/alexander_olsson.jpg";
-  alt1.setAttribute("class", "btn btn-warning");
-  alt2.setAttribute("class", "btn btn-warning");
-  alt3.setAttribute("class", "btn btn-warning");
-  alt4.setAttribute("class", "btn btn-warning");
-  alt.classList.add("hide");
-  results.classList.add("hide");
-  results.classList.remove("d-flex");
+  startNewGameBtn.addEventListener("click", () => {
+    number = 0;
+    correctGuesses = 0;
+    tries = 0;
+    wrongGuesses = 0;
+    cheat.innerText = tries;
+    openLevelsBtn();
+    openAltBtn();
+    img.src = "/assets/images/vem_dar.jpg";
+    alt1.setAttribute("class", "btn btn-warning");
+    alt2.setAttribute("class", "btn btn-warning");
+    alt3.setAttribute("class", "btn btn-warning");
+    alt4.setAttribute("class", "btn btn-warning");
+    alt.classList.add("hide");
+    results.classList.add("hide");
+    results.classList.remove("d-flex");
+  });
 };
 
+startNewGame();
+
 // LEVEL 1
-btnLevel1.addEventListener("click", (e) => {
-  levelFunc(level1, 10);
-});
+levelFunc(level1, 10, btnLevel1);
 
 // LEVEL 2
-btnLevel2.addEventListener("click", (e) => {
-  levelFunc(level2, 20);
-});
+levelFunc(level2, 20, btnLevel2);
 
 // LEVEL 3
-btnLevel3.addEventListener("click", (e) => {
-  levelFunc(level3);
-});
 
-startNewGameBtn.addEventListener("click", (e) => {
-  startNewGame();
-});
+levelFunc(level3, 41, btnLevel3);
