@@ -117,7 +117,7 @@ const renderResult = (levelNbr) => {
   const cheat = document.querySelector("#cheat");
   cheat.innerText = tries;
   if (tries === levelNbr.length) {
-    nextBtn.setAttribute("disabled", "disabled"); ////////////////////////////////////////////
+    nextBtn.setAttribute("disabled", "disabled");
     if (correctGuesses >= levelNbr.length / 2) {
       results.classList.add("alert", "alert-success");
     } else {
@@ -168,7 +168,7 @@ const nxtBtnCode = (levelNbr) => {
 // FUNKTION FÖR ALLA LEVELS
 const levelFunc = (arr, nbr, levelNbr) => {
   levelNbr.addEventListener("click", () => {
-    nextBtn.setAttribute("disabled", "disabled"); ////////////////////////////////////
+    nextBtn.setAttribute("disabled", "disabled");
     closeLevelsBtn();
     shuffleArray(shuffledStudents);
     arr = shuffledStudents.slice(0, nbr);
@@ -177,7 +177,7 @@ const levelFunc = (arr, nbr, levelNbr) => {
     createAlternatives(arr);
 
     alt.addEventListener("click", (e) => {
-      nextBtn.removeAttribute("disabled", "disabled"); //////////////////////////////////
+      nextBtn.removeAttribute("disabled", "disabled");
       //checking guess
       if (e.target.tagName === "BUTTON") {
         closeAltBtn();
@@ -231,8 +231,6 @@ const startNewGame = () => {
   });
 };
 
-startNewGame();
-
 // LEVEL 1
 levelFunc(level1, 10, btnLevel1);
 
@@ -242,3 +240,5 @@ levelFunc(level2, 20, btnLevel2);
 // LEVEL 3
 
 levelFunc(level3, 41, btnLevel3);
+
+startNewGame();
