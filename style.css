@@ -1,20 +1,12 @@
 #top {
-  display: flex;
-  justify-content: space-between;
+	display: flex;
+	justify-content: space-between;
 }
 
-.hide {
-  display: none;
+.hide{
+	display: none;
 }
 
 #results img {
-  max-width: 20%;
-}
-
-.alert-success {
-  background-color: lightgreen;
-}
-
-span {
-  color: red;
+	max-width: 20%;
 }
