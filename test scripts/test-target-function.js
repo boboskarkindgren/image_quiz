@@ -1,7 +1,5 @@
 
 
-
-
 const body = document.querySelector('body');
 const header = document.querySelector('#header');
 
@@ -194,6 +192,32 @@ const nxtBtnCode = (levelNbr) => {
 
 // FUNKTION FÖR ALLA LEVELS
 
+const targetFunc = (e, correctPerson, arr) => {
+	if (e.target.tagName === 'BUTTON'){
+		closeAltBtn()
+		console.log(e.target.innerText);
+		if (e.target.innerText == correctPerson.name) {
+			console.log('correct');
+			e.target.classList.add('btn-success');
+			e.target.classList.remove('btn-warning');
+			tries ++;//
+			correctGuesses ++;//
+			highscore.innerText = `Highscore: ${correctGuesses}`;// 
+		} else {
+			console.log('wrong');
+			e.target.classList.add('btn-danger');
+			e.target.classList.remove('btn-warning');
+			tries++
+			wrongGuesses ++; 
+			fails.push(correctPerson);
+			console.log(fails);
+		}
+		
+		btnResultsCode(arr);
+
+		}
+} 
+
 const levelFunc = (arr, nbr) =>{
 	closeLevelsBtn()
 	shuffleArray(shuffledStudents);
@@ -205,6 +229,7 @@ const levelFunc = (arr, nbr) =>{
 	
 
 	alt.addEventListener('click', e => {
+		
 		if (e.target.tagName === 'BUTTON'){
 		closeAltBtn()
 		console.log(e.target.innerText);
@@ -228,7 +253,7 @@ const levelFunc = (arr, nbr) =>{
 		btnResultsCode(arr);
 
 		}
-		
+	
 	})
 
 	
@@ -286,12 +311,6 @@ btnLevel3.addEventListener('click', e => {
 startNewGameBtn.addEventListener('click', e =>{
 	startNewGame();
 })
-
-
-
-
-
-
 
 
 
